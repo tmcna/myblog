@@ -1,0 +1,44 @@
+<div id="notice"><%= notice %></div>
+
+<h1>Posts</h1>
+
+<table class="table table-striped">
+<thead>
+  <tr>
+    <td>Title</td>
+    <td>User</td>
+    <td>Date</td>
+    <td></td>
+    <td></td>
+  </tr>
+</thead>
+<tbody>
+<% @posts.each do |post| %>
+<tr id="post_<%= post.id %>">
+  <td><%= link_to post.title, post_path(post) %> (<%= post.comments.size %>)</td>
+  <td>(TBD)</td>
+  <td><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+  <td><%= link_to 'Edit', edit_post_path(post) %></td>
+  <td><%= link_to 'Delete', post, :confirm => 'Sure?',
+                                  :method => :delete,
+                                  :remote => true %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+
+<%= link_to 'New Posts', new_post_path, :class => 'btn' %>
+
+<script>
+$(function() {
+  setTimeout(function() {
+    $('#notice').fadeOut("slow");
+  }, 800);
+  
+  $('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
+    $('#post_'+data.post.id).fadeOut("slow");
+  });
+  
+});
+</script>
+

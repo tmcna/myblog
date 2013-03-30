@@ -1,0 +1,61 @@
+<h1><%= @post.title %></h1>
+
+<p>
+<pre><%= @post.content %></pre>
+</p>
+
+<h2>Comments</h2>
+<ul>
+<% if @post.comments.any? %>
+
+<table class="table">
+<% @post.comments.each do |comment| %>
+<tr id="comment_<%= comment.id %>">
+<td><%= comment.commenter %></td>
+<td><%= comment.body %></td>
+<td>
+<%= link_to 'delete', [comment.post, comment], :confirm => 'Sure?',
+                                               :method  => :delete,
+                                               :class   => 'btn btn-danger',
+                                               :remote  => true %>
+</td>
+</tr>
+<% end %>
+</table>
+<% else %>
+<li>no comment yet.</li>
+<% end %>
+</ul>
+
+<h2>Add a comment</h2>
+<%= form_for([@post, @comment]) do |f| %>
+
+<% if @comment.errors.any? %>
+<ul>
+<% @comment.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+<% end %>
+
+<div class="field">
+  <%= f.label :commenter %>
+  <%= f.text_field :commenter %>
+</div>
+<div class="field">
+  <%= f.label :body %>
+  <%= f.text_area :body, :rows => 5 %>
+</div>
+<div class="actions">
+  <%= f.submit :class => "btn" %>
+</div>
+<% end %>
+
+<script>
+$(function() {
+  $('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
+    $('#comment_'+data.comment.id).fadeOut("slow");
+  });
+  
+});
+</script>
