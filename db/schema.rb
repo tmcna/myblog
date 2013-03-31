@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20130330072003) do
     t.string   "commenter"
     t.text     "body"
     t.integer  "post_id"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -26,12 +27,14 @@ ActiveRecord::Schema.define(:version => 20130330072003) do
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
+    t.string   "name",                   :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"

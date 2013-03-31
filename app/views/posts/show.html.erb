@@ -11,7 +11,7 @@
 <table class="table">
 <% @post.comments.each do |comment| %>
 <tr id="comment_<%= comment.id %>">
-<td><%= comment.commenter %></td>
+<td><%= comment.user.name %></td>
 <td><%= comment.body %></td>
 <td>
 <%= link_to 'delete', [comment.post, comment], :confirm => 'Sure?',
@@ -46,6 +46,7 @@
   <%= f.label :body %>
   <%= f.text_area :body, :rows => 5 %>
 </div>
+<%= f.hidden_field :user_id, :value => current_user.id %>
 <div class="actions">
   <%= f.submit :class => "btn" %>
 </div>
