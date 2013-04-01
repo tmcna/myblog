@@ -1,27 +1,26 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Private Blog", root_path, id: "logo" %>
+      <%= link_to "Group Blog", root_path, :class => "brand" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Home", posts_path %></li>
-          <li><%= link_to "Help", "#" %></li>
+          <li><%= link_to "記事一覧", posts_path %></li>
           <% if signed_in? %>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <%= current_user.name %>
+              ログイン中：<%= current_user.name %>
               <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Settings", edit_user_registration_path %></li>
+                <li><%= link_to "ユーザ設定", edit_user_registration_path %></li>
                 <li class="divider"></li>
                 <li>
-                  <%= link_to "Sign out", destroy_user_session_path, method: "delete" %>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: "delete" %>
                 </li>
               </ul>
             </li>
           <% else %>
-            <li><%= link_to "Sign in", new_user_session_path %></li>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
           <% end %>
         </ul>
       </nav>

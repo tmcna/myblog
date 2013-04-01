@@ -4,7 +4,7 @@
 <pre><%= @post.content %></pre>
 </p>
 
-<h2>Comments</h2>
+<h2>コメント</h2>
 <ul>
 <% if @post.comments.any? %>
 
@@ -27,7 +27,6 @@
 <% end %>
 </ul>
 
-<h2>Add a comment</h2>
 <%= form_for([@post, @comment]) do |f| %>
 
 <% if @comment.errors.any? %>
@@ -39,11 +38,7 @@
 <% end %>
 
 <div class="field">
-  <%= f.label :commenter %>
-  <%= f.text_field :commenter %>
-</div>
-<div class="field">
-  <%= f.label :body %>
+  <%= f.label "こちらにコメントを入力してください。" %>
   <%= f.text_area :body, :rows => 5 %>
 </div>
 <%= f.hidden_field :user_id, :value => current_user.id %>
